@@ -48,19 +48,21 @@ if __name__ == "__main__":
     while True:
         start = time.time()
         img_array = picam2.capture_array("main")
-        cv2.imshow('Preview', img_array.copy())
+        img_array = cv2.cvtColor(img_array, cv2.COLOR_BGR2RGB)
+        cv2.imshow('Preview', img_array)
         cv2.waitKey(1)
 
         #if counter%15 == 0:
-        face_locations = face.face_locations(cv2.coloermg_array)
+        face_locations = face.face_locations(img_array)
         print("Found {} faces in image.".format(len(face_locations)))
         face_encodings = face.face_encodings(img_array, face_locations)
 
         try:
             for i in range(len(face_encodings)):
                 match = face.compare_faces(known_face_encodings, face_encodings[i])
+                print(match)
 
-                if match[0]:
+                if match[i]:
                         print("Found...{}".format(known_face_names[i]))
         except:
             pass
