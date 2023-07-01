@@ -44,7 +44,8 @@ if __name__ == "__main__":
 
     print("\nStarting camera...\n")
     picam2.start()
-    time.sleep(10)
+    #time.sleep(10)
+
     while True:
         start = time.time()
         img_array = picam2.capture_array("main")
@@ -60,16 +61,19 @@ if __name__ == "__main__":
         try:
             for i in range(len(face_encodings)):
                 match = face.compare_faces(known_face_encodings, face_encodings[i])
-                print(known_face_names[i]+"\n")
                 print(match)
+                print("Names: ", known_face_names)
+                #print(known_face_names[i]+"\n")
 
-                if match[i]:
-                        print("Found...{}".format(known_face_names[i]))
+                if True in match:
+                    for j in match:
+                        if j == True:
+                            print("Found...{}".format(known_face_names[match.index(j)]))
         except:
             pass
             
         end = time.time()
-        print("Time Taken: ", end-start)
+        print("\nTime Taken: ", end-start, end="\n")
 
 
 
