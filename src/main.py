@@ -60,6 +60,7 @@ if __name__ == "__main__":
         try:
             for i in range(len(face_encodings)):
                 match = face.compare_faces(known_face_encodings, face_encodings[i])
+                print(known_face_names[i]+"\n")
                 print(match)
 
                 if match[i]:
