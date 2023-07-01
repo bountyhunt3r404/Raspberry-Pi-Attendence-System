@@ -15,6 +15,9 @@ picam2 = picamera2.Picamera2()
 preview_config = picam2.create_preview_configuration(main={"format": 'RGB888', "size": (640, 480)},                                             
                                                     lores={"format": 'YUV420', "size": (320, 240)},
                                                     transform=libcamera.Transform(hflip=1))
+
+capture_config = picam2.create_video_configuration(main={"format": 'RGB888', "size": (640, 480)},
+                                                   transform=libcamera.Transfornm(hlip=1))
                                                     
 
 
@@ -63,6 +66,7 @@ if __name__ == "__main__":
 
         try:
             for i in range(len(face_encodings)):
+                capture_array = picam2.switch_mode_and_capture_array(capture_config, "main")
                 match = face.compare_faces(known_face_encodings, face_encodings[i], tolerance)
                 print(match)
                 print("Names: ", known_face_names)
