@@ -12,7 +12,7 @@ import os
 
 #Raspbery Pi camera Confgurations
 picam2 = picamera2.Picamera2()
-preview_config = picam2.create_preview_configuration(main={"format": 'RGB888', "size": (320, 240)},                                             
+preview_config = picam2.create_preview_configuration(main={"format": 'RGB888', "size": (640, 480)},                                             
                                                     lores={"format": 'YUV420', "size": (320, 240)},
                                                     transform=libcamera.Transform(hflip=1))
                                                     
@@ -25,8 +25,11 @@ known_face_encodings_dir = "/home/bounty/main/database/known_face_encodings"
 #Global Variables
 known_face_encodings = []
 known_face_names = []
-img_array = np.empty((240, 320, 3), dtype=np.uint8)
+img_array = np.empty((480, 640, 3), dtype=np.uint8)
 counter = 0
+
+#Face Reccognition Variables
+tolerance = 0.5
 
 #Functions
 
@@ -60,7 +63,7 @@ if __name__ == "__main__":
 
         try:
             for i in range(len(face_encodings)):
-                match = face.compare_faces(known_face_encodings, face_encodings[i])
+                match = face.compare_faces(known_face_encodings, face_encodings[i], tolerance)
                 print(match)
                 print("Names: ", known_face_names)
                 #print(known_face_names[i]+"\n")
