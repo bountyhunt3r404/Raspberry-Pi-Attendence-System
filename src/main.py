@@ -2,6 +2,7 @@
 import picamera2
 import face_rec_module as frm
 import face_recognition as face
+import finger_module as finger
 import numpy as np
 import libcamera
 import multiprocessing
@@ -12,12 +13,12 @@ import os
 
 #Raspbery Pi camera Confgurations
 picam2 = picamera2.Picamera2()
-preview_config = picam2.create_preview_configuration(main={"format": 'RGB888', "size": (640, 480)},                                             
+preview_config = picam2.create_preview_configuration(main={"format": 'BGR888', "size": (640, 480)},                                             
                                                     lores={"format": 'YUV420', "size": (320, 240)},
                                                     transform=libcamera.Transform(hflip=1))
 
-capture_config = picam2.create_video_configuration(main={"format": 'RGB888', "size": (640, 480)},
-                                                   transform=libcamera.Transfornm(hlip=1))
+capture_config = picam2.create_video_configuration(main={"format": 'BGR888', "size": (640, 480)},
+                                                   transform=libcamera.Transform(hflip=1))
                                                     
 
 
@@ -49,6 +50,7 @@ if __name__ == "__main__":
     print("Names: ", known_face_names)
 
     print("\nStarting camera...\n")
+    picam2.configure(preview_config)
     picam2.start()
     #time.sleep(10)
 
