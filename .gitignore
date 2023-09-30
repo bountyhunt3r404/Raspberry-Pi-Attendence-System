@@ -11,3 +11,4 @@ database/face_bins/spandan/spandan_05.npy
 database/face_bins/swikar/swikar_01.npy
 database/images/swikar/swikar_01.jpg
 database/known_face_encodings/spandan.npy
+main/__pycache__
