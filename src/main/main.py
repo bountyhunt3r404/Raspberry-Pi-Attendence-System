@@ -2,7 +2,7 @@
 import picamera2
 import face_rec_module as frm
 import face_recognition as face
-import finger_module as finger
+#import finger_module as finger
 from gpiozero import Button
 import numpy as np
 import libcamera
